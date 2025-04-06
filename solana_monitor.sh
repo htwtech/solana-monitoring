@@ -11,8 +11,7 @@
 configDir="$HOME/.config/solana/cli" # the directory for the config files, eg.: /home/user/.config/solana
 identityPubkey=""      # identity pubkey for the validator, insert if autodiscovery fails
 voteAccount=""         # vote account address for the validator, specify if there are more than one or if autodiscovery fails
-binDir="/root/.local/share/solana/install/releases/v2.1.14-jito/bin" # auto detection of the solana binary directory can fail or an alternative custom installation is preferred, in 
-case insert like $HOME/solana/target/release
+binDir="/root/.local/share/solana/install/releases/v2.1.14-jito/bin" # auto detection of the solana binary directory can fail or an alternative custom installation is preferred, in case insert like $HOME/solana/target/release
 rpcURL=""              # default is localhost with port number autodiscovered, alternatively it can be specified like http://custom.rpc.com:port
 format="SOL"           # amounts shown in 'SOL' instead of lamports
 now=$(date +%s%3N)     # Timestamp in Prometheus format
