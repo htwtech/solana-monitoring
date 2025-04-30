@@ -7,7 +7,7 @@
 
 ########### CONFIG ############################################
 #
-# The directory output of the Prometeus metrics file
+# The directory output of the Prometheus metrics file
 metricsFile="/var/lib/node_exporter/solana_validator_metrics.prom"
 # Timeout after which to clear the metrics file if they are not updated
 timeout_sec=120  
