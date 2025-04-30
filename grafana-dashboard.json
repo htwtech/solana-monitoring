@@ -1,4 +1,53 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.6.1"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -19,7 +68,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 68,
+  "id": null,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -33,14 +82,9 @@
       },
       "id": 146,
       "panels": [],
-      "title": "",
       "type": "row"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 24,
@@ -58,7 +102,6 @@
         "mode": "html"
       },
       "pluginVersion": "11.6.1",
-      "title": "",
       "transparent": true,
       "type": "text"
     },
@@ -79,7 +122,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -142,7 +185,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "node_time_seconds{instance=\"${instance}\",job=\"${job}\"} - node_boot_time_seconds{instance=\"${instance}\",job=\"${job}\"}",
@@ -158,7 +201,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -240,7 +283,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_status{instance=\"${instance}\",job=\"${job}\"}",
@@ -256,7 +299,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -308,7 +351,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_activatedStake{instance=\"${instance}\",job=\"${job}\"}",
@@ -324,7 +367,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -377,7 +420,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_leaderSlots{instance=\"${instance}\",job=\"${job}\"}",
@@ -393,7 +436,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -446,7 +489,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_skippedSlots{instance=\"${instance}\",job=\"${job}\"}",
@@ -462,7 +505,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -525,7 +568,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_pctSkipped{instance=\"${instance}\",job=\"${job}\"}",
@@ -541,7 +584,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -593,7 +636,11 @@
           "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"} / (solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16)  * 100",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Vote Percentage",
@@ -602,7 +649,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -651,7 +698,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -667,7 +714,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -716,7 +763,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "delta(solana_validator_credits{instance=\"${instance}\" ,job=\"${job}\"}[5m])",
@@ -732,7 +779,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -782,7 +829,11 @@
           "expr": "solana_validator_lastVote{instance=\"${instance}\",job=\"${job}\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Last Vote",
@@ -791,7 +842,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -841,7 +892,11 @@
           "expr": "solana_validator_rootSlot{instance=\"${instance}\",job=\"${job}\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Root Slot",
@@ -850,7 +905,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -905,7 +960,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_commission{instance=\"${instance}\",job=\"${job}\"}",
@@ -921,7 +976,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "System load over all CPU cores together",
       "fieldConfig": {
@@ -977,7 +1032,11 @@
           "expr": "scalar(node_load1{instance=\"$instance\",job=\"${job}\"}) * 100 / count(count(node_cpu_seconds_total{instance=\"$instance\",job=\"${job}\"}) by (cpu))",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Sys Load",
@@ -986,7 +1045,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1056,7 +1115,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "scalar(node_load1{instance=\"${instance}\",job=\"${job}\"})",
@@ -1072,7 +1131,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1139,7 +1198,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", instance=\"${instance}\",job=\"${job}\"}[$__rate_interval])))",
@@ -1155,7 +1214,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1225,7 +1284,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "(1 - (node_memory_MemAvailable_bytes{instance=\"$instance\",job=\"${job}\"} / node_memory_MemTotal_bytes{instance=\"$instance\",job=\"${job}\"})) * 100",
@@ -1242,7 +1301,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1310,7 +1369,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "((node_memory_SwapTotal_bytes{instance=\"${instance}\",job=\"${job}\"} - node_memory_SwapFree_bytes{instance=\"${instance}\",job=\"${job}\"}) / (node_memory_SwapTotal_bytes{instance=\"${instance}\",job=\"${job}\"})) * 100",
@@ -1326,7 +1385,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1392,7 +1451,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "irate(node_pressure_io_waiting_seconds_total{instance=\"${instance}\",job=\"${job}\"}[$__rate_interval])",
@@ -1408,7 +1467,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1476,7 +1535,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"${instance}\" ,job=\"${job}\",  mountpoint=\"${accounts}\"} * 100) / node_filesystem_size_bytes{instance=\"${instance}\" ,job=\"${job}\",  mountpoint=\"${accounts}\"})",
@@ -1492,7 +1551,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1560,7 +1619,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"${instance}\" ,job=\"${job}\",  mountpoint=\"${ledger}\"} * 100) / node_filesystem_size_bytes{instance=\"${instance}\" ,job=\"${job}\",  mountpoint=\"${ledger}\"})",
@@ -1576,7 +1635,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1644,7 +1703,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"${instance}\"  ,job=\"${job}\", mountpoint=\"/\"} * 100) / node_filesystem_size_bytes{instance=\"${instance}\" ,job=\"${job}\",mountpoint=\"/\"})",
@@ -1660,7 +1719,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1722,7 +1781,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epoch{instance=\"${instance}\",job=\"${job}\"}",
@@ -1738,7 +1797,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1788,7 +1847,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epochEnds{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -1804,7 +1863,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1863,7 +1922,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_pctEpochElapsed{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -1879,7 +1938,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1929,7 +1988,11 @@
           "expr": "rate(solana_validator_tps{instance=\"$instance\",job=\"${job}\"}[5m])",
           "legendFormat": "TPS",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Solana TPS [5min]",
@@ -1938,7 +2001,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1987,7 +2050,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_version{instance=\"${instance}\",job=\"${job}\"}",
@@ -2003,7 +2066,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2054,7 +2117,11 @@
           "expr": "solana_validator_timeStamp{instance=\"${instance}\",job=\"${job}\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Last update",
@@ -2076,7 +2143,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2157,7 +2224,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"} / (solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16)  * 100",
@@ -2174,7 +2241,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2255,7 +2322,11 @@
           "expr": "solana_validator_rootDistance{instance=\"${instance}\" ,job=\"${job}\"}",
           "legendFormat": "",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Root Distance",
@@ -2264,7 +2335,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2345,7 +2416,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -2358,7 +2429,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"} - solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16 ",
@@ -2371,7 +2442,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16",
@@ -2388,7 +2459,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2467,7 +2538,11 @@
           "expr": "solana_validator_voteDistance{instance=\"${instance}\" ,job=\"${job}\"}",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Vote Distance",
@@ -2476,7 +2551,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2561,7 +2636,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "delta(solana_validator_credits{instance=\"${instance}\" ,job=\"${job}\"}[5m])",
@@ -2577,7 +2652,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2662,7 +2737,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_leaderSlots{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -2674,7 +2749,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_skippedSlots{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -2691,7 +2766,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2772,7 +2847,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -2785,7 +2860,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16 - solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -2798,7 +2873,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16",
@@ -2815,7 +2890,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -2902,7 +2977,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_validatorBalance{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -2918,7 +2993,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3050,7 +3125,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_pctSkipped{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -3062,7 +3137,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_pctTotSkipped{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -3079,7 +3154,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Active stake on the validator.",
       "fieldConfig": {
@@ -3163,7 +3238,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_activatedStake{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -3179,7 +3254,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3262,7 +3337,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_pctTotDelinquent{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -3278,7 +3353,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -3361,7 +3436,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_validatorVoteBalance{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -3377,7 +3452,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3456,7 +3531,11 @@
           "expr": "rate(solana_validator_tps{instance=\"$instance\" ,job=\"${job}\"}[5m])",
           "legendFormat": "TPS",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Solana TPS",
@@ -3478,7 +3557,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3570,7 +3649,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"system\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3582,7 +3661,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"user\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3595,7 +3674,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"nice\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3608,7 +3687,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum by(instance) (irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"iowait\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3621,7 +3700,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"irq\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3634,7 +3713,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"softirq\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3647,7 +3726,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"steal\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3660,7 +3739,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(irate(node_cpu_seconds_total{instance=\"$instance\", mode=\"idle\" ,job=\"${job}\"}[$__rate_interval])) / scalar(count(count(node_cpu_seconds_total{instance=\"$instance\" ,job=\"${job}\"}) by (cpu)))",
@@ -3677,7 +3756,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3770,7 +3849,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -3787,7 +3866,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -3965,7 +4044,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "node_memory_MemTotal_bytes{instance=\"$instance\" ,job=\"${job}\"}",
@@ -3977,7 +4056,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "node_memory_MemTotal_bytes{instance=\"$instance\" ,job=\"${job}\"} - node_memory_MemFree_bytes{instance=\"$instance\" ,job=\"${job}\"} - (node_memory_Cached_bytes{instance=\"$instance\" ,job=\"${job}\"} + node_memory_Buffers_bytes{instance=\"$instance\" ,job=\"${job}\"} + node_memory_SReclaimable_bytes{instance=\"$instance\" ,job=\"${job}\"})",
@@ -3990,7 +4069,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "node_memory_Cached_bytes{instance=\"$instance\" ,job=\"${job}\"} + node_memory_Buffers_bytes{instance=\"$instance\" ,job=\"${job}\"} + node_memory_SReclaimable_bytes{instance=\"$instance\" ,job=\"${job}\"}",
@@ -4003,7 +4082,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "node_memory_MemFree_bytes{instance=\"$instance\" ,job=\"${job}\"}",
@@ -4016,7 +4095,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "(node_memory_SwapTotal_bytes{instance=\"$instance\" ,job=\"${job}\"} - node_memory_SwapFree_bytes{instance=\"$instance\" ,job=\"${job}\"})",
@@ -4033,7 +4112,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4154,12 +4233,16 @@
           "expr": "irate(node_disk_reads_completed_total{instance=\"$instance\" ,job=\"${job}\"}[$__rate_interval])",
           "legendFormat": "{{device}} - Reads completed",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "irate(node_disk_writes_completed_total{instance=\"$instance\" ,job=\"${job}\"}[$__rate_interval])",
@@ -4176,7 +4259,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4264,7 +4347,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "solana_validator_openFiles{instance=\"${instance}\" ,job=\"${job}\"}",
@@ -4280,7 +4363,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4403,12 +4486,16 @@
           "expr": "irate(node_disk_read_bytes_total{instance=\"$instance\" ,job=\"${job}\"}[$__rate_interval])",
           "legendFormat": "{{device}} - Read bytes",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "irate(node_disk_written_bytes_total{instance=\"$instance\" ,job=\"${job}\"}[$__rate_interval])",
@@ -4425,7 +4512,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4546,7 +4633,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "irate(node_network_receive_bytes_total{instance=\"$instance\" ,job=\"${job}\"}[$__rate_interval])*8",
@@ -4558,7 +4645,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "irate(node_network_transmit_bytes_total{instance=\"$instance\" ,job=\"${job}\"}[$__rate_interval])*8",
@@ -4575,7 +4662,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "be83kkzzg3j7ke"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -4659,12 +4746,16 @@
           "expr": "delta(node_network_receive_errs_total{instance=\"$instance\" ,job=\"${job}\"}[1m])",
           "legendFormat": "{{device}} - Receive errors",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "be83kkzzg3j7ke"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "delta(node_network_transmit_errs_total{instance=\"$instance\" ,job=\"${job}\"}[1m])",
@@ -4679,7 +4770,6 @@
       "type": "timeseries"
     }
   ],
-  "preload": false,
   "refresh": "30s",
   "schemaVersion": 41,
   "tags": [
@@ -4690,10 +4780,7 @@
     "list": [
       {
         "allowCustomValue": false,
-        "current": {
-          "text": "Solana Mainnet",
-          "value": "Solana Mainnet"
-        },
+        "current": {},
         "definition": "label_values(job)",
         "label": "Job",
         "name": "job",
@@ -4709,13 +4796,10 @@
       },
       {
         "allowCustomValue": false,
-        "current": {
-          "text": "147.28.171.13:9100",
-          "value": "147.28.171.13:9100"
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "be83kkzzg3j7ke"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values({job=\"$job\"},instance)",
         "includeAll": false,
@@ -4742,5 +4826,6 @@
   "timezone": "",
   "title": "Solana Validator",
   "uid": "eekimyclgbnk0b",
-  "version": 3
+  "version": 3,
+  "weekStart": ""
 }
