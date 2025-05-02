@@ -64,7 +64,6 @@
       }
     ]
   },
-  "description": "This dashboard can help you run a Solana validator. All metrics are fetched from RPC using the solana-monitor script. Please check our github https://github.com/htwtech/solana-monitoring . You are free to change this dashboard as you wish. ",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -73,25 +72,13 @@
   "liveNow": true,
   "panels": [
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 146,
-      "panels": [],
-      "type": "row"
-    },
-    {
       "gridPos": {
         "h": 3,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 0
       },
-      "id": 145,
+      "id": 148,
       "options": {
         "code": {
           "language": "plaintext",
@@ -111,12 +98,12 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 3
       },
       "id": 115,
       "panels": [],
       "repeat": "server",
-      "title": "Quick stats $name",
+      "title": "Quick stats $instance",
       "type": "row"
     },
     {
@@ -159,7 +146,7 @@
         "h": 2,
         "w": 2,
         "x": 0,
-        "y": 5
+        "y": 4
       },
       "id": 92,
       "maxDataPoints": 100,
@@ -256,7 +243,7 @@
         "h": 2,
         "w": 2,
         "x": 2,
-        "y": 5
+        "y": 4
       },
       "id": 54,
       "maxDataPoints": 100,
@@ -325,7 +312,7 @@
         "h": 2,
         "w": 2,
         "x": 4,
-        "y": 5
+        "y": 4
       },
       "id": 43,
       "options": {
@@ -394,7 +381,7 @@
         "h": 2,
         "w": 2,
         "x": 6,
-        "y": 5
+        "y": 4
       },
       "id": 99,
       "options": {
@@ -451,7 +438,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "semi-dark-purple"
+                "color": "light-purple"
               }
             ]
           },
@@ -463,7 +450,7 @@
         "h": 2,
         "w": 2,
         "x": 8,
-        "y": 5
+        "y": 4
       },
       "id": 100,
       "options": {
@@ -542,7 +529,7 @@
         "h": 2,
         "w": 2,
         "x": 10,
-        "y": 5
+        "y": 4
       },
       "id": 62,
       "options": {
@@ -609,9 +596,74 @@
         "h": 2,
         "w": 2,
         "x": 12,
-        "y": 5
+        "y": 4
       },
       "id": 143,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "rate(solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"}[5m]) / (rate(solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"}[5m]) * 16) * 100",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Momentary Vote %",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-purple"
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 14,
+        "y": 4
+      },
+      "id": 147,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -643,7 +695,7 @@
           }
         }
       ],
-      "title": "Vote Percentage",
+      "title": "Vote %",
       "type": "stat"
     },
     {
@@ -672,10 +724,10 @@
       "gridPos": {
         "h": 2,
         "w": 2,
-        "x": 14,
-        "y": 5
+        "x": 16,
+        "y": 4
       },
-      "id": 140,
+      "id": 146,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -737,8 +789,8 @@
       "gridPos": {
         "h": 2,
         "w": 2,
-        "x": 16,
-        "y": 5
+        "x": 18,
+        "y": 4
       },
       "id": 141,
       "options": {
@@ -801,8 +853,8 @@
       "gridPos": {
         "h": 2,
         "w": 2,
-        "x": 18,
-        "y": 5
+        "x": 20,
+        "y": 4
       },
       "id": 134,
       "options": {
@@ -864,8 +916,8 @@
       "gridPos": {
         "h": 2,
         "w": 2,
-        "x": 20,
-        "y": 5
+        "x": 22,
+        "y": 4
       },
       "id": 133,
       "options": {
@@ -907,77 +959,6 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "noValue": "5%",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-purple"
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 2,
-        "x": 22,
-        "y": 5
-      },
-      "id": 44,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {},
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.6.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "solana_validator_commission{instance=\"${instance}\",job=\"${job}\"}",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Validator Fee",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
       "description": "System load over all CPU cores together",
       "fieldConfig": {
         "defaults": {
@@ -1005,7 +986,7 @@
         "h": 4,
         "w": 2,
         "x": 0,
-        "y": 7
+        "y": 6
       },
       "id": 131,
       "options": {
@@ -1088,7 +1069,7 @@
         "h": 4,
         "w": 2,
         "x": 2,
-        "y": 7
+        "y": 6
       },
       "id": 69,
       "maxDataPoints": 100,
@@ -1172,7 +1153,7 @@
         "h": 4,
         "w": 2,
         "x": 4,
-        "y": 7
+        "y": 6
       },
       "id": 73,
       "maxDataPoints": 100,
@@ -1258,7 +1239,7 @@
         "h": 4,
         "w": 2,
         "x": 6,
-        "y": 7
+        "y": 6
       },
       "id": 52,
       "maxDataPoints": 100,
@@ -1343,7 +1324,7 @@
         "h": 4,
         "w": 2,
         "x": 8,
-        "y": 7
+        "y": 6
       },
       "id": 80,
       "maxDataPoints": 100,
@@ -1425,7 +1406,7 @@
         "h": 4,
         "w": 2,
         "x": 10,
-        "y": 7
+        "y": 6
       },
       "id": 67,
       "maxDataPoints": 100,
@@ -1509,7 +1490,7 @@
         "h": 4,
         "w": 2,
         "x": 12,
-        "y": 7
+        "y": 6
       },
       "id": 71,
       "maxDataPoints": 100,
@@ -1593,7 +1574,7 @@
         "h": 4,
         "w": 2,
         "x": 14,
-        "y": 7
+        "y": 6
       },
       "id": 89,
       "maxDataPoints": 100,
@@ -1677,7 +1658,7 @@
         "h": 4,
         "w": 2,
         "x": 16,
-        "y": 7
+        "y": 6
       },
       "id": 90,
       "maxDataPoints": 100,
@@ -1754,7 +1735,7 @@
         "h": 2,
         "w": 2,
         "x": 18,
-        "y": 7
+        "y": 6
       },
       "id": 98,
       "maxDataPoints": 100,
@@ -1821,7 +1802,7 @@
         "h": 2,
         "w": 2,
         "x": 20,
-        "y": 7
+        "y": 6
       },
       "id": 124,
       "options": {
@@ -1889,7 +1870,7 @@
         "h": 2,
         "w": 2,
         "x": 22,
-        "y": 7
+        "y": 6
       },
       "id": 97,
       "options": {
@@ -1961,7 +1942,7 @@
         "h": 2,
         "w": 2,
         "x": 18,
-        "y": 9
+        "y": 8
       },
       "id": 136,
       "options": {
@@ -2024,7 +2005,7 @@
         "h": 2,
         "w": 2,
         "x": 20,
-        "y": 9
+        "y": 8
       },
       "id": 29,
       "options": {
@@ -2090,7 +2071,7 @@
         "h": 2,
         "w": 2,
         "x": 22,
-        "y": 9
+        "y": 8
       },
       "id": 142,
       "options": {
@@ -2133,11 +2114,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 10
       },
       "id": 117,
       "panels": [],
-      "title": "Validator Stats $name",
+      "title": "Validator Stats $instance",
       "type": "row"
     },
     {
@@ -2180,15 +2161,20 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "dashed"
             }
           },
           "mappings": [],
+          "max": 100,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "purple"
+              },
+              {
+                "color": "#d7ff00",
+                "value": 100
               }
             ]
           },
@@ -2200,9 +2186,9 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 11
       },
-      "id": 126,
+      "id": 145,
       "options": {
         "alertThreshold": true,
         "legend": {
@@ -2227,7 +2213,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"} / (solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16)  * 100",
+          "expr": "rate(solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"}[5m]) / (rate(solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"}[5m]) * 16) * 100\r\n",
           "hide": false,
           "instant": false,
           "legendFormat": "Vote Percentage",
@@ -2235,7 +2221,7 @@
           "refId": "A"
         }
       ],
-      "title": "Vote Percentage",
+      "title": "Momentary Vote Percentage [5m]",
       "type": "timeseries"
     },
     {
@@ -2283,6 +2269,7 @@
           },
           "fieldMinMax": false,
           "mappings": [],
+          "max": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -2299,7 +2286,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 11
       },
       "id": 137,
       "options": {
@@ -2372,6 +2359,201 @@
               "mode": "none"
             },
             "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple"
+              },
+              {
+                "color": "#d7ff00",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "id": 126,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "solana_validator_epochCredits{instance=\"${instance}\" ,job=\"${job}\"} / (solana_validator_slotIndex{instance=\"${instance}\" ,job=\"${job}\"} * 16)  * 100",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Vote Percentage",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Vote Percentage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 19
+      },
+      "id": 138,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "solana_validator_voteDistance{instance=\"${instance}\" ,job=\"${job}\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Vote Distance",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
               "mode": "off"
             }
           },
@@ -2392,7 +2574,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 27
       },
       "id": 144,
       "options": {
@@ -2464,7 +2646,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisBorderShow": false,
@@ -2496,56 +2678,125 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "dashed"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "transparent"
+              },
+              {
+                "color": "dark-red",
+                "value": 25
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cluster Skiprate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#3b27aa"
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 24.9999
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "My Skiprate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#b765ff",
+                  "mode": "fixed"
+                }
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 20
+        "y": 27
       },
-      "id": 138,
+      "id": 56,
+      "interval": "1m",
       "options": {
+        "alertThreshold": true,
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
       "pluginVersion": "11.6.1",
       "targets": [
         {
-          "editorMode": "code",
-          "expr": "solana_validator_voteDistance{instance=\"${instance}\" ,job=\"${job}\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
-          }
+          },
+          "editorMode": "code",
+          "expr": "solana_validator_pctSkipped{instance=\"${instance}\" ,job=\"${job}\"}",
+          "instant": false,
+          "legendFormat": "My Skiprate",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "expr": "solana_validator_pctTotSkipped{instance=\"${instance}\" ,job=\"${job}\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Cluster Skiprate",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Vote Distance",
+      "title": "Skiprate",
       "type": "timeseries"
     },
     {
@@ -2612,7 +2863,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 35
       },
       "id": 61,
       "options": {
@@ -2713,7 +2964,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 28
+        "y": 35
       },
       "id": 75,
       "options": {
@@ -2823,7 +3074,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 43
       },
       "id": 121,
       "options": {
@@ -2953,7 +3204,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 43
       },
       "id": 4,
       "options": {
@@ -2998,7 +3249,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-BlPu"
           },
           "custom": {
             "axisBorderShow": false,
@@ -3010,7 +3261,7 @@
             "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
-            "gradientMode": "none",
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -3030,125 +3281,56 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "dashed"
+              "mode": "off"
             }
           },
-          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent"
-              },
-              {
-                "color": "dark-red",
-                "value": 25
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Cluster Skiprate"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
-                }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "#3b27aa"
-                    },
-                    {
-                      "color": "dark-orange",
-                      "value": 24.9999
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "My Skiprate"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#b765ff",
-                  "mode": "fixed"
-                }
+                "color": "green"
               }
             ]
           }
-        ]
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 51
       },
-      "id": 56,
-      "interval": "1m",
+      "id": 132,
       "options": {
-        "alertThreshold": true,
         "legend": {
-          "calcs": [
-            "last"
-          ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
+          "mode": "single",
+          "sort": "desc"
         }
       },
       "pluginVersion": "11.6.1",
       "targets": [
         {
+          "editorMode": "code",
+          "expr": "rate(solana_validator_tps{instance=\"$instance\" ,job=\"${job}\"}[5m])",
+          "legendFormat": "TPS",
+          "range": true,
+          "refId": "A",
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "solana_validator_pctSkipped{instance=\"${instance}\" ,job=\"${job}\"}",
-          "instant": false,
-          "legendFormat": "My Skiprate",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "solana_validator_pctTotSkipped{instance=\"${instance}\" ,job=\"${job}\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Cluster Skiprate",
-          "range": true,
-          "refId": "B"
+          }
         }
       ],
-      "title": "Skiprate",
+      "title": "Solana TPS",
       "type": "timeseries"
     },
     {
@@ -3216,7 +3398,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 51
       },
       "id": 122,
       "options": {
@@ -3315,7 +3497,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 52
+        "y": 59
       },
       "id": 76,
       "options": {
@@ -3414,7 +3596,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 52
+        "y": 59
       },
       "id": 57,
       "options": {
@@ -3450,108 +3632,16 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-BlPu"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 60
-      },
-      "id": 132,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "desc"
-        }
-      },
-      "pluginVersion": "11.6.1",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "rate(solana_validator_tps{instance=\"$instance\" ,job=\"${job}\"}[5m])",
-          "legendFormat": "TPS",
-          "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
-        }
-      ],
-      "title": "Solana TPS",
-      "type": "timeseries"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 68
+        "y": 67
       },
       "id": 113,
       "panels": [],
-      "title": "System Stats $name",
+      "title": "System Stats $instance",
       "type": "row"
     },
     {
@@ -3619,7 +3709,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 69
+        "y": 68
       },
       "id": 104,
       "interval": "1m",
@@ -3818,7 +3908,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 69
+        "y": 68
       },
       "id": 102,
       "interval": "1",
@@ -4014,7 +4104,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 81
+        "y": 80
       },
       "id": 108,
       "interval": "1m",
@@ -4205,7 +4295,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 81
+        "y": 80
       },
       "id": 127,
       "options": {
@@ -4322,7 +4412,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 93
+        "y": 92
       },
       "id": 118,
       "interval": "1m",
@@ -4456,7 +4546,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 93
+        "y": 92
       },
       "id": 128,
       "options": {
@@ -4603,7 +4693,7 @@
         "h": 12,
         "w": 12,
         "x": 0,
-        "y": 105
+        "y": 104
       },
       "id": 111,
       "interval": "1m",
@@ -4719,7 +4809,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 105
+        "y": 104
       },
       "id": 130,
       "options": {
@@ -4770,12 +4860,9 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "30s",
+  "refresh": "1m",
   "schemaVersion": 41,
-  "tags": [
-    "Validator",
-    "Solana"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
@@ -4819,13 +4906,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Solana Validator",
-  "uid": "eekimyclgbnk0b",
+  "title": "Solana Validator Mainnet Copy",
+  "uid": "eeknphqeoju9sc",
   "version": 3,
   "weekStart": ""
 }
