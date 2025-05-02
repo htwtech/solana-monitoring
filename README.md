@@ -1,8 +1,10 @@
 # Solana monitoring #
-<img src="https://i.imgur.com/gMhmo8M.jpg" title="solana prometheus grafana" style="width:250px;"/><img src="https://i.imgur.com/AOGGAna.jpg"  title="solana prometheus grafana2" style="width:250px;" /><img src="https://i.imgur.com/eitZW3d.png" title="solana prometheus grafana3" style="width:243px;"/>
----
-<a href="https://imgur.com/YBi8O3W"><img src="https://i.imgur.com/YBi8O3W.jpg" title="source: imgur.com" /></a>
+
+
 ## Introduction
+
+<img src="https://i.imgur.com/KmrCeax.jpg" title="solana prometheus grafana" style="width:250px;"/><img src="https://i.imgur.com/e6PBegW.jpg" title="source: imgur.com" style="width:250px;"/>
+
 This code suite helps you monitor your Solana validator using Prometheus and Grafana.  
 You can visually track your validator's performance and configure alerts when metrics deviate from specified thresholds. We used as a basis the code from the great [Stakeconomy](https://github.com/stakeconomy/solanamonitoring). Thank them very much for that!
 
@@ -37,7 +39,7 @@ cd solana-monitoring
 chmod +x *.sh
 ```
 
-3. Edit `solana-monitor.sh` and set the required configuration. You can use either the file or the corresponding public key.
+3. Edit `solana-monitor.sh` and set the required configuration. You can use either the key file or the corresponding public key.
 Required parameters:
 - `identityPubkey` — the public identity key of your validator  
 - `votePubkey` — the vote account public key of your validator
@@ -52,8 +54,8 @@ nano solana-monitor.sh
 ```
 
 4. Run `solana-monitor.sh` and check the output and metrics file.  
-If everything is working, there should be no output to the console, and the file will contain metrics.  
-If not, check the settings in `solana-monitor.sh`.
+If everything is working, there should be no output to the console, and the `metricsFile` will contain metrics.  
+If not, check the settings in `solana-monitor.sh` and ouput.
 
 5. Create a cron job for periodic data collection.  
 **Note:** Make sure your user has permission to execute `solana-monitor.sh`.
@@ -62,10 +64,10 @@ If not, check the settings in `solana-monitor.sh`.
 (crontab -l 2>/dev/null; echo "* * * * * /full/path/to/solana-monitoring/solana-monitor.sh") | crontab -
 ```
 
-6. Make sure the metrics file is being updated periodically.  
+6. Make sure the `metricsFile` is being updated periodically.  
 If not, re-run `solana-monitor.sh` manually and check your cron settings. 
 
-7. Since node does not reset the metrics file after it is read, you can use this script to control its update. This script monitors the update of the metrics file and if it has not been updated within a specified interval, the script resets it.  
+7. Since node exporter does not reset the metrics file after it is read, you can use this script to control its update. This script monitors the update of the metrics file and if it has not been updated within a specified interval, the script resets it.  
 Add it to the cron 
 
 ```bash
@@ -83,8 +85,8 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-User=root
-Group=root
+User=node_exporter
+Group=node_exporter
 ExecStart=/usr/local/bin/node_exporter \
   --collector.disable-defaults \
   --collector.loadavg \
