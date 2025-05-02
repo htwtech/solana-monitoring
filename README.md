@@ -1,7 +1,7 @@
 # Solana monitoring #
 <img src="https://i.imgur.com/gMhmo8M.jpg" title="solana prometheus grafana" style="width:250px;"/><img src="https://i.imgur.com/AOGGAna.jpg"  title="solana prometheus grafana2" style="width:250px;" /><img src="https://i.imgur.com/eitZW3d.png" title="solana prometheus grafana3" style="width:243px;"/>
 ---
-
+<a href="https://imgur.com/YBi8O3W"><img src="https://i.imgur.com/YBi8O3W.jpg" title="source: imgur.com" /></a>
 ## Introduction
 This code suite helps you monitor your Solana validator using Prometheus and Grafana.  
 You can visually track your validator's performance and configure alerts when metrics deviate from specified thresholds. We used as a basis the code from the great [Stakeconomy](https://github.com/stakeconomy/solanamonitoring). Thank them very much for that!
@@ -37,7 +37,7 @@ cd solana-monitoring
 chmod +x *.sh
 ```
 
-3. Edit `solana-monitor.sh` and set the required configuration. 
+3. Edit `solana-monitor.sh` and set the required configuration. You can use either the file or the corresponding public key.
 Required parameters:
 - `identityPubkey` — the public identity key of your validator  
 - `votePubkey` — the vote account public key of your validator
@@ -45,6 +45,7 @@ Required parameters:
 - `votePubkeyFile` — the vote account public key file   
 - `binDir` — the path to the solana binary file 
 - `metricsFile` — the full path to the Prometheus metrics file, including the filename  
+
 
 ```bash
 nano solana-monitor.sh
@@ -62,9 +63,16 @@ If not, check the settings in `solana-monitor.sh`.
 ```
 
 6. Make sure the metrics file is being updated periodically.  
-If not, re-run `solana-monitor.sh` manually and check your cron settings.
+If not, re-run `solana-monitor.sh` manually and check your cron settings. 
 
-7. Add `--collector.textfile.directory=/path/to/your/node_exporter_metrics/dir/` to the Node Exporter service file,  
+7. Since node does not reset the metrics file after it is read, you can use this script to control its update. This script monitors the update of the metrics file and if it has not been updated within a specified interval, the script resets it.  
+Add it to the cron 
+
+```bash
+(crontab -l 2>/dev/null; echo "* * * * * /full/path/to/solana-monitoring/watchdog-solana-monitor.sh") | crontab -
+```
+
+8. Add `--collector.textfile.directory=/path/to/your/node_exporter_metrics/dir/` to the Node Exporter service file,  
 or create a new one. In the example below, we enable only the necessary Node Exporter collectors:
 
 ```bash
@@ -100,7 +108,7 @@ WantedBy=default.target
 EOF
 ```
 
-8. **Reload the Node Exporter service and check the logs:**
+9. **Reload the Node Exporter service and check the logs:**
 
 ```bash
 sudo systemctl daemon-reload
