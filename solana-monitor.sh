@@ -47,7 +47,6 @@ solana_validator_commission="NaN"
 solana_validator_activatedStake="NaN"
 solana_validator_credits="NaN"
 solana_validator_epochCredits="NaN"
-solana_validator_openFiles="NaN"
 solana_validator_validatorBalance="NaN"
 solana_validator_validatorVoteBalance="NaN"
 solana_validator_epoch="NaN"
@@ -90,11 +89,8 @@ if [ -z "$votePubkey" ]; then
    exit 1
 fi
 
-
 validatorBalance=$($cli balance --url $rpcURL $identityPubkey | grep -o '[0-9.]*')
 validatorVoteBalance=$($cli balance --url $rpcURL $votePubkey | grep -o '[0-9.]*')
-
-openfiles=$(cat /proc/sys/fs/file-nr | awk '{ print $1 }')
 validatorCheck=$($cli validators --url $rpcURL | grep $identityPubkey)
 
 if [ $(grep -c $votePubkey <<< $validatorCheck) == 0  ]; then echo "validator not found in set"; exit 1; fi
@@ -184,7 +180,6 @@ fi
       "solana_validator_activatedStake:$activatedStake" \
       "solana_validator_credits:$credits" \
       "solana_validator_epochCredits:$epochCredits" \
-      "solana_validator_openFiles:$openfiles" \
       "solana_validator_validatorBalance:$validatorBalance" \
       "solana_validator_validatorVoteBalance:$validatorVoteBalance" \
       "solana_validator_nodes:$nodes" \
