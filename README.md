@@ -137,7 +137,6 @@ Prometheus should include the following metrics: `solana_validator_*`:
 - solana_validator_activatedStake
 - solana_validator_credits
 - solana_validator_epochCredits
-- solana_validator_openFiles
 - solana_validator_validatorBalance
 - solana_validator_validatorVoteBalance
 - solana_validator_epoch
