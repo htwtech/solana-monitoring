@@ -74,8 +74,7 @@ Add it to the cron
 (crontab -l 2>/dev/null; echo "* * * * * /full/path/to/solana-monitoring/watchdog-solana-monitor.sh") | crontab -
 ```
 
-8. Add `--collector.textfile.directory=/path/to/your/node_exporter_metrics/dir/` to the Node Exporter service file,  
-or create a new one. In the example below, we enable only the necessary Node Exporter collectors:
+8. Add `--collector.textfile.directory=/path/to/your/node_exporter_metrics/dir/` to the Node Exporter service file, or create a new one. In the example below, we enable only the necessary Node Exporter collectors:
 
 ```bash
 sudo tee /etc/systemd/system/node_exporter.service > /dev/null <<EOF
