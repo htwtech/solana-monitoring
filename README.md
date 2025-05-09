@@ -3,7 +3,7 @@
 
 ## Introduction
 
-<img src="https://i.imgur.com/KmrCeax.jpeg" style="width:250px;"/><img src="https://i.imgur.com/e6PBegW.jpeg" style="width:250px;"/>
+<img src="https://i.imgur.com/KmrCeax.jpeg" style="width:250px;"/><img src="https://i.imgur.com/e6PBegW.jpeg" style="width:274px;"/>
 
 This code suite helps you monitor your Solana validator using Prometheus and Grafana.  
 You can visually track your validator's performance and configure alerts when metrics deviate from specified thresholds. We used as a basis the code from the great [Stakeconomy](https://github.com/stakeconomy/solanamonitoring). Thank them very much for that!
