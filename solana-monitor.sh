@@ -89,8 +89,10 @@ if [ -z "$votePubkey" ]; then
    exit 1
 fi
 
+
 validatorBalance=$($cli balance --url $rpcURL $identityPubkey | grep -o '[0-9.]*')
 validatorVoteBalance=$($cli balance --url $rpcURL $votePubkey | grep -o '[0-9.]*')
+
 validatorCheck=$($cli validators --url $rpcURL | grep $identityPubkey)
 
 if [ $(grep -c $votePubkey <<< $validatorCheck) == 0  ]; then echo "validator not found in set"; exit 1; fi
@@ -100,6 +102,8 @@ validatorBlockProduction=$(jq -r '.leaders[] | select(.identityPubkey == '\"$ide
 validators=$($cli validators --url $rpcURL --output json-compact 2>&-)
 currentValidatorInfo=$(jq -r '.validators[] | select(.voteAccountPubkey == '\"$votePubkey\"')' <<<$validators)
 delinquentValidatorInfo=$(jq -r '.validators[] | select(.voteAccountPubkey == '\"$votePubkey\"' and .delinquent == true)' <<<$validators)
+
+
 
 if [[ ((-n "$currentValidatorInfo" || "$delinquentValidatorInfo" ))  ]]; then
    status=1 #status 0=validating 1=up 2=error 3=delinquent 4=stopped
@@ -133,6 +137,14 @@ if [[ ((-n "$currentValidatorInfo" || "$delinquentValidatorInfo" ))  ]]; then
         totalActiveStake=$(jq -r '.totalActiveStake' <<<$validators)
         totalDelinquentStake=$(jq -r '.totalDelinquentStake' <<<$validators)
         pctTotDelinquent=$(echo "scale=2 ; 100 * $totalDelinquentStake / $totalActiveStake" | bc)
+
+        read leaderSlots skippedSlots <<<$($cli block-production | grep $identityPubkey | awk '{print $2,$4}')
+        read totalBlocksProduced totalSlotsSkipped  <<<$($cli block-production | grep total | awk '{print $4,$6}')
+echo $skippedSlots
+echo $leaderSlots
+echo $totalBlocksProduced 
+echo $totalSlotsSkipped
+
         if [ "$format" == "SOL" ]; then activatedStake=$(echo "scale=2 ; $activatedStake / 1000000000.0" | bc); fi
         if [ -n "$leaderSlots" ]; then pctSkipped=$(echo "scale=2 ; 100 * $skippedSlots / $leaderSlots" | bc); fi
         if [ -z "$leaderSlots" ]; then leaderSlots=0 skippedSlots=0 pctSkipped=0; fi
