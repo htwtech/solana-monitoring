@@ -137,14 +137,8 @@ if [[ ((-n "$currentValidatorInfo" || "$delinquentValidatorInfo" ))  ]]; then
         totalActiveStake=$(jq -r '.totalActiveStake' <<<$validators)
         totalDelinquentStake=$(jq -r '.totalDelinquentStake' <<<$validators)
         pctTotDelinquent=$(echo "scale=2 ; 100 * $totalDelinquentStake / $totalActiveStake" | bc)
-
         read leaderSlots skippedSlots <<<$($cli block-production | grep $identityPubkey | awk '{print $2,$4}')
         read totalBlocksProduced totalSlotsSkipped  <<<$($cli block-production | grep total | awk '{print $4,$6}')
-echo $skippedSlots
-echo $leaderSlots
-echo $totalBlocksProduced 
-echo $totalSlotsSkipped
-
         if [ "$format" == "SOL" ]; then activatedStake=$(echo "scale=2 ; $activatedStake / 1000000000.0" | bc); fi
         if [ -n "$leaderSlots" ]; then pctSkipped=$(echo "scale=2 ; 100 * $skippedSlots / $leaderSlots" | bc); fi
         if [ -z "$leaderSlots" ]; then leaderSlots=0 skippedSlots=0 pctSkipped=0; fi
