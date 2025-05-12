@@ -97,13 +97,9 @@ validatorCheck=$($cli validators --url $rpcURL | grep $identityPubkey)
 
 if [ $(grep -c $votePubkey <<< $validatorCheck) == 0  ]; then echo "validator not found in set"; exit 1; fi
 
-blockProduction=$($cli block-production  --output json-compact 2>&- | grep -v Note:)
-validatorBlockProduction=$(jq -r '.leaders[] | select(.identityPubkey == '\"$identityPubkey\"')' <<<$blockProduction)
 validators=$($cli validators --url $rpcURL --output json-compact 2>&-)
 currentValidatorInfo=$(jq -r '.validators[] | select(.voteAccountPubkey == '\"$votePubkey\"')' <<<$validators)
 delinquentValidatorInfo=$(jq -r '.validators[] | select(.voteAccountPubkey == '\"$votePubkey\"' and .delinquent == true)' <<<$validators)
-
-
 
 if [[ ((-n "$currentValidatorInfo" || "$delinquentValidatorInfo" ))  ]]; then
    status=1 #status 0=validating 1=up 2=error 3=delinquent 4=stopped
@@ -130,10 +126,6 @@ if [[ ((-n "$currentValidatorInfo" || "$delinquentValidatorInfo" ))  ]]; then
         lastVote=$(jq -r '.lastVote' <<<$currentValidatorInfo)
         rootDistance=$(echo "$validatorCheck" | grep $identityPubkey | grep -oP '\(\s*-?\d+\)' | tr -d '() ' | sed -n '2p')
         voteDistance=$(echo "$validatorCheck" | grep $identityPubkey | grep -oP '\(\s*-?\d+\)' | tr -d '() ' | head -n1)
-        leaderSlots=$(jq -r '.leaderSlots' <<<$validatorBlockProduction)
-        skippedSlots=$(jq -r '.skippedSlots' <<<$validatorBlockProduction)
-        totalBlocksProduced=$(jq -r '.total_slots' <<<$blockProduction)
-        totalSlotsSkipped=$(jq -r '.total_slots_skipped' <<<$blockProduction)
         totalActiveStake=$(jq -r '.totalActiveStake' <<<$validators)
         totalDelinquentStake=$(jq -r '.totalDelinquentStake' <<<$validators)
         pctTotDelinquent=$(echo "scale=2 ; 100 * $totalDelinquentStake / $totalActiveStake" | bc)
